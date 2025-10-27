@@ -44,3 +44,9 @@ TagManager:
   - name: back
     uniqueID: 696524249
     locked: 0
+  - name: PlayArea
+    uniqueID: 792046499
+    locked: 0
+  - name: ball
+    uniqueID: 2449421581
+    locked: 0
