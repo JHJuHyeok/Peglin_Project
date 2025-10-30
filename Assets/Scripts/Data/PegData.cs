@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "PlayArea/PegData")]
-public class ModularPegData : ScriptableObject
+public class PegData : ScriptableObject
 {
     public string pegID;
     public string pegName;
     public GameObject prefab; 
 
-    public PegEffectType pegEffect;
+    public PegType pegType;
 }
 
-public enum PegEffectType
+public enum PegType
 {
     Dull,
     Coin,

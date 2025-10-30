@@ -4,19 +4,19 @@ using UnityEngine;
 
 public interface IPegEffect
 {
-    void conflictEvent();
+    void conflictEvent(GameManager game);
 }
 
 public class DullEffect : IPegEffect
 {
-    public void conflictEvent()
+    public void conflictEvent(GameManager game)
     {
         // 아무 효과 없음
     }
 }
 public class CoinEffect : IPegEffect
 {
-    public void conflictEvent()
+    public void conflictEvent(GameManager game)
     {
         // 코인 획득 애니메이션
 
@@ -25,14 +25,14 @@ public class CoinEffect : IPegEffect
 }
 public class RefreshEffect : IPegEffect
 {
-    public void conflictEvent()
+    public void conflictEvent(GameManager game)
     {
         // 패턴 다시 불러오기
     }
 }
 public class CritEffect : IPegEffect
 {
-    public void conflictEvent()
+    public void conflictEvent(GameManager game)
     {
         // 크리티컬 효과 적용
 
@@ -42,7 +42,7 @@ public class CritEffect : IPegEffect
 }
 public class BombEffect : IPegEffect
 {
-    public void conflictEvent()
+    public void conflictEvent(GameManager game)
     {
         // 첫 충돌이면 이미지 변환
 
@@ -53,7 +53,7 @@ public class BombEffect : IPegEffect
 }
 public class ShieldEffect : IPegEffect
 {
-    public void conflictEvent()
+    public void conflictEvent(GameManager game)
     {
         // 뭐였더라?
     }

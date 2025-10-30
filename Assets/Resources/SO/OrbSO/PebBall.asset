@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c990602fde0c242adc914174a59b1d, type: 3}
+  m_Name: PebBall
+  m_EditorClassIdentifier: 
+  OrbName: pebball
+  prefab: {fileID: 7531127345370374564, guid: d0cecd43feb184547aa56be9f0ce385f, type: 3}
+  OrbLevel: 1
+  atk_One: 2
+  crit_One: 4
+  atk_Two: 3
+  crit_Two: 6
+  atk_Three: 4
+  crit_Three: 8
+  OrbSpecialEffect: 
