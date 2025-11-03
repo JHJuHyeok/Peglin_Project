@@ -15,6 +15,7 @@ MonoBehaviour:
   OrbName: pebball
   prefab: {fileID: 7531127345370374564, guid: d0cecd43feb184547aa56be9f0ce385f, type: 3}
   OrbLevel: 1
+  description: "\uD2B9\uBCC4\uD55C \uD6A8\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
   atk_One: 2
   crit_One: 4
   atk_Two: 3

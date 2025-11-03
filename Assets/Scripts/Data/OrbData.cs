@@ -9,6 +9,7 @@ public class OrbData : ScriptableObject
     public string OrbName;
     public GameObject prefab;
     public int OrbLevel;
+    public string description;
 
     [Header("오브 레벨 별 수치")]
     public int atk_One;

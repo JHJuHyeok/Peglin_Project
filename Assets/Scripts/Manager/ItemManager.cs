@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : Singleton
 {
 
     public void ApplyEffect(RelicData relic, PlayerManager player, GameManager game)

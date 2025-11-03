@@ -9,3 +9,10 @@ public interface IOrbEffect
 
 
 // 이 밑으로 오브들 효과 추가
+public class PebBall : OrbBase, IOrbEffect
+{
+    public void ConflictEffect(GameManager game)
+    {
+
+    }
+}

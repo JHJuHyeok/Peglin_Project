@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7199204694393768314}
   - component: {fileID: 1894116059584881697}
   - component: {fileID: 7535005948568977933}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bouncer
   m_TagString: Bouncer
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 5791950867102919691}
   - component: {fileID: 7573589072649259540}
   - component: {fileID: 6311648991860034204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tileset_66
   m_TagString: Untagged
   m_Icon: {fileID: 0}
