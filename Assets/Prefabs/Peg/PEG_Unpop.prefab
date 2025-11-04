@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 284782890300387059}
   - component: {fileID: 7118867989506481995}
   - component: {fileID: 8633188708515288562}
+  - component: {fileID: -8075619328620403127}
   m_Layer: 0
   m_Name: PEG_Unpop
-  m_TagString: Untagged
+  m_TagString: Peg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,3 +135,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: a276781681f812644be9e1671b946223, type: 2}
+--- !u!114 &-8075619328620403127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7605128314723139284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0751812fb667847b944327cb4f6825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

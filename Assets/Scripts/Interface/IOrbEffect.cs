@@ -4,14 +4,14 @@ using UnityEngine;
 
 public interface IOrbEffect
 {
-    void ConflictEffect(GameManager game);
+    void ConflictEffect(BattleManager game);
 }
 
 
 // 이 밑으로 오브들 효과 추가
 public class PebBall : OrbBase, IOrbEffect
 {
-    public void ConflictEffect(GameManager game)
+    public void ConflictEffect(BattleManager game)
     {
 
     }

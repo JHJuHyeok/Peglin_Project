@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IRelicEffect
 {
-    void ApplyEffect(GameManager game);
+    void ApplyEffect(BattleManager game);
 }
 
 

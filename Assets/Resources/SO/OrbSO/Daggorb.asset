@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92c990602fde0c242adc914174a59b1d, type: 3}
-  m_Name: PebBall
+  m_Name: Daggorb
   m_EditorClassIdentifier: 
-  OrbName: "\uD3A9\uBCFC"
-  prefab: {fileID: 7531127345370374564, guid: d0cecd43feb184547aa56be9f0ce385f, type: 3}
+  OrbName: "\uB2E8\uAD6C"
+  prefab: {fileID: 2398304487301160255, guid: fccf493131767e2479af221ed8a886ae, type: 3}
   OrbLevel: 1
-  description: "\uD2B9\uBCC4\uD55C \uD6A8\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
-  atk_One: 2
-  crit_One: 4
-  atk_Two: 3
-  crit_Two: 6
-  atk_Three: 4
-  crit_Three: 8
+  description: "\uC77C\uBC18\uACF5\uACA9\uC774 \uB9E4\uC6B0 \uC57D\uD569\uB2C8\uB2E4.
+    \uCE58\uBA85\uD0C0\uAC00 \uB9C9\uB300\uD55C \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
+  atk_One: 1
+  crit_One: 7
+  atk_Two: 1
+  crit_Two: 10
+  atk_Three: 1
+  crit_Three: 13
   OrbSpecialEffect: 

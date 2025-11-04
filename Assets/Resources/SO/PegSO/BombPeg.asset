@@ -15,4 +15,5 @@ MonoBehaviour:
   pegID: peg_bomb
   pegName: BombPeg
   prefab: {fileID: 1428337281955797833, guid: 4aa9ed855f0dd0342be289a10195fba8, type: 3}
+  breakCount: 2
   pegType: 4

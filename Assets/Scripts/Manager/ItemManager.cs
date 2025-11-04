@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemManager : Singleton
 {
 
-    public void ApplyEffect(RelicData relic, PlayerManager player, GameManager game)
+    public void ApplyEffect(RelicData relic, PlayerManager player, BattleManager game)
     {
         // 수치를 변환할 때
         if (relic.isStatItem)

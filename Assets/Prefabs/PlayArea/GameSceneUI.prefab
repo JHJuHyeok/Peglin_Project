@@ -103,7 +103,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: be95b72e2cdd8954fab03f822efd636a, type: 3}
+    m_Font: {fileID: 12800000, guid: e42086dd288a55a468889ab257243c9f, type: 3}
     m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 7599522373453451248}
   - component: {fileID: 3605443311189305231}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: CurrentPaze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,9 +758,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 306646879788171772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32, y: -30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3568138426255484743
@@ -1118,7 +1118,7 @@ GameObject:
   - component: {fileID: 2768490529412738084}
   - component: {fileID: 2092956218819058813}
   m_Layer: 5
-  m_Name: PegDamage
+  m_Name: DullDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1573,6 +1573,7 @@ GameObject:
   - component: {fileID: 25982666705641163}
   - component: {fileID: 9166917091112982223}
   - component: {fileID: 5186354524636763908}
+  - component: {fileID: 8868048999173837111}
   m_Layer: 5
   m_Name: QuickButton
   m_TagString: Untagged
@@ -1656,7 +1657,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1680,7 +1681,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9166917091112982223}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8868048999173837111}
+        m_TargetAssemblyTypeName: QuickButton, Assembly-CSharp
+        m_MethodName: ToggleQuick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8868048999173837111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533298283560896537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f571a3a34f57b814890408b297e87de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonIamge: {fileID: 9166917091112982223}
+  idleSprite: {fileID: 21300000, guid: 73c11d484426b324db570154a7f320ac, type: 3}
+  pressedSprite: {fileID: 21300000, guid: 9a94e7c509e2d144b8cb6029402de50a, type: 3}
 --- !u!1 &6573979944579070893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,9 +1741,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 306646879788171772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32, y: -140}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7551269990831062699
@@ -2023,8 +2051,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -518, y: 95}
-  m_SizeDelta: {x: 55, y: 50}
+  m_AnchoredPosition: {x: -508, y: 95}
+  m_SizeDelta: {x: 60, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5396861450888070034
 CanvasRenderer:
@@ -2055,13 +2083,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: be95b72e2cdd8954fab03f822efd636a, type: 3}
-    m_FontSize: 28
+    m_Font: {fileID: 12800000, guid: e42086dd288a55a468889ab257243c9f, type: 3}
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2080,7 +2108,7 @@ GameObject:
   - component: {fileID: 1091184715771370797}
   - component: {fileID: 2834352472898031717}
   m_Layer: 5
-  m_Name: BallStatText
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2146,7 +2174,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD2B9\uBCC4\uD55C \uD6A8\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
+  m_Text: "\uC5EC\uAE30\uC5D0 \uD6A8\uACFC \uC785\uB825"
 --- !u!1 &7457397638562251977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,7 +2638,7 @@ GameObject:
   - component: {fileID: 4248677800579060463}
   - component: {fileID: 8158282844125867184}
   m_Layer: 5
-  m_Name: PegImage
+  m_Name: DullImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2795,7 +2823,7 @@ GameObject:
   - component: {fileID: 4004230502804750589}
   - component: {fileID: 2529808993912731522}
   m_Layer: 5
-  m_Name: PegDamage
+  m_Name: CritDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3132,7 +3160,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8733154796541528377}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &3437109244104771307
 Animator:
   serializedVersion: 5
@@ -3261,9 +3301,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 306646879788171772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32, y: -85}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6586704386774079408

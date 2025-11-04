@@ -7,7 +7,8 @@ public class PegData : ScriptableObject
 {
     public string pegID;
     public string pegName;
-    public GameObject prefab; 
+    public GameObject prefab;
+    public int breakCount;
 
     public PegType pegType;
 }

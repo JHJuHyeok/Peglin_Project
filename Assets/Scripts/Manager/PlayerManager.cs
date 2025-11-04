@@ -33,7 +33,11 @@ public class PlayerManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        MaxHP = 80;
+        currentHP = MaxHP;
     }
+
 
     public void ModifyStat(StatType statType, int value)
     {
@@ -67,6 +71,11 @@ public class PlayerManager : MonoBehaviour
             myOrbList.Add(orb);
             Debug.Log($"오브 추가 : {orb.OrbName}");
         }
+    }
+
+    public void RemoveOrb(OrbData orb)
+    {
+        myOrbList.Remove(orb);
     }
 
     // 피격 시 데미지 처리

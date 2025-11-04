@@ -15,4 +15,5 @@ MonoBehaviour:
   pegID: peg_coin
   pegName: CoinPeg
   prefab: {fileID: 6324134683180932677, guid: 04a08e3376829044684fa989f1a288e8, type: 3}
+  breakCount: 1
   pegType: 1

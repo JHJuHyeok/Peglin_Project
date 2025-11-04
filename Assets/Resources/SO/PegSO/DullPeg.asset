@@ -15,4 +15,5 @@ MonoBehaviour:
   pegID: peg_dull
   pegName: DullPeg
   prefab: {fileID: 7605128314723139284, guid: 96f0cc84569c685449c7057032d4ddc6, type: 3}
-  pegEffect: 0
+  breakCount: 1
+  pegType: 0

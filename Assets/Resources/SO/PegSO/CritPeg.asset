@@ -15,4 +15,5 @@ MonoBehaviour:
   pegID: peg_crit
   pegName: CritPeg
   prefab: {fileID: 3584124653251798550, guid: 77ab3545181d06e4ca895dcba86dab26, type: 3}
+  breakCount: 1
   pegType: 3

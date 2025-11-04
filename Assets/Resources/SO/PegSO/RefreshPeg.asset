@@ -15,4 +15,5 @@ MonoBehaviour:
   pegID: peg_refresh
   pegName: RefreshPeg
   prefab: {fileID: 6479323879963060443, guid: b005e67d09dc7d04fbe16b1a72f91a90, type: 3}
+  breakCount: 1
   pegType: 2
