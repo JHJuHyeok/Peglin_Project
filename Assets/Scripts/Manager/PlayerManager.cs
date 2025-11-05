@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public int MaxHP;           // 최대 체력
     public int currentHP;       // 현재 체력
     public int Coin;            // 현재 소지금
+    public int currentPaze;     // 현재 위치
 
     [Header("전투 정보")]
     public int Buff_Str;        // 추가 보통 공격력
@@ -76,6 +77,11 @@ public class PlayerManager : MonoBehaviour
     public void RemoveOrb(OrbData orb)
     {
         myOrbList.Remove(orb);
+    }
+
+    public void UpgradeOrb(OrbData orb)
+    {
+        orb.OrbLevel++;
     }
 
     // 피격 시 데미지 처리

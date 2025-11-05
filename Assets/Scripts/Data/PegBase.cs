@@ -23,7 +23,7 @@ public class PegBase : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     // 게임을 시작하거나 새로고침 함수가 실행될 때

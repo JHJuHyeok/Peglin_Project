@@ -59,6 +59,7 @@ public class BattleManager : MonoBehaviour
     private Vector2 aimDir;                     // 마우스 위치
 
     [Header("마우스 커서")]
+    [SerializeField] private Vector2 cursorSpot;
     [SerializeField] private Texture2D cursorIdle;
     [SerializeField] private Texture2D cursorSelect;
     [SerializeField] private Texture2D cursorAim;
@@ -68,6 +69,7 @@ public class BattleManager : MonoBehaviour
     public bool isMyTurn = true;
     public bool isOrbFall = false;
     private bool isProcessingTurn = false;
+
 
     private void Awake()
     {
@@ -81,6 +83,7 @@ public class BattleManager : MonoBehaviour
 
         GetNewOrbs();
 
+        cursorSpot = new Vector2(-3f, 0f);
         CoinText.text = $"{player.Coin}";
         HPText.text = $"{player.currentHP}/{player.MaxHP}";
         GarbageCount.text = $"{garbageCount}/{garbageMax}";
@@ -105,7 +108,7 @@ public class BattleManager : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     isMyTurn = false;
-                    isProcessingTurn = false;
+                    //isProcessingTurn = false;
                     Fire();
                 }
             }
@@ -120,7 +123,7 @@ public class BattleManager : MonoBehaviour
     {
         isProcessingTurn = true;
 
-        Cursor.SetCursor(cursorAim, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorAim, cursorSpot, CursorMode.Auto);
 
         if (orbList == null)
             GetNewOrbs();
@@ -140,7 +143,7 @@ public class BattleManager : MonoBehaviour
     {
         isProcessingTurn = true;
 
-        Cursor.SetCursor(cursorCant, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorCant, cursorSpot, CursorMode.Auto);
 
         if (isOrbFall)
         {
@@ -158,6 +161,7 @@ public class BattleManager : MonoBehaviour
     {
         orbRb.gravityScale = predictor.gravityScale;
         orbRb.AddForce(aimDir * power, ForceMode2D.Impulse);
+        StopCoroutine(MyTurn());
         predictor.HideTrajectory();
     }
 
