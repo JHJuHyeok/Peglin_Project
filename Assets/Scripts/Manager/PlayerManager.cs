@@ -8,10 +8,9 @@ public enum StatType { MaxHP, currentHP, Coin, Buff_Str, Buff_Crit, Buff_bomb }
 public class PlayerManager : MonoBehaviour
 {
     [Header("플레이어 정보")]
-    public int MaxHP;           // 최대 체력
+    public int MaxHP = 80;           // 최대 체력
     public int currentHP;       // 현재 체력
     public int Coin;            // 현재 소지금
-    public int currentPaze;     // 현재 위치
 
     [Header("전투 정보")]
     public int Buff_Str;        // 추가 보통 공격력
@@ -35,7 +34,6 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        MaxHP = 80;
         currentHP = MaxHP;
     }
 

@@ -60,6 +60,15 @@ public class PopupManager : MonoBehaviour
             OnMapBtn();
         // 승리할 시 리워드 패널 활성화
 
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+        }
+
     }
 
     public void AddOrbUI(OrbData orb, GameObject parent, Sprite one, Sprite two, Sprite three)

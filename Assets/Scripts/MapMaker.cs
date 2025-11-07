@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MapMaker : MonoBehaviour
 {
-    public MapGenerator generator;
-    public GameObject nodePrefab;
-    public GameObject linePrefab;
+    [Header("¸Ê ¼³Á¤")]
+    public int layerCount = 12;
+    public int minNodesPerLayer = 2;
+    public int maxNodesPerLayer = 4;
 
     private List<MapNodeData> nodes;
 
@@ -19,8 +20,8 @@ public class MapMaker : MonoBehaviour
 
     private void Start()
     {
-        nodes = generator.GenerateMap();
-
+        //nodes = generator.GenerateMap();
+        DrawMap();
     }
 
     private void DrawMap()
@@ -29,11 +30,11 @@ public class MapMaker : MonoBehaviour
 
         foreach(var node in nodes)
         {
-            var obj = Instantiate(nodePrefab, node.position, Quaternion.identity, transform);
-            obj.name = node.nodeType.ToString();
-            var sr = obj.GetComponent<SpriteRenderer>();
-            if (sr)
-                sr.sprite = GetIcon(node.nodeType);
+            //var obj = Instantiate(nodePrefab, node.position, Quaternion.identity, transform);
+            //obj.name = node.nodeType.ToString();
+            //var sr = obj.GetComponent<SpriteRenderer>();
+            //if (sr)
+            //    sr.sprite = GetIcon(node.nodeType);
         }
     }
 

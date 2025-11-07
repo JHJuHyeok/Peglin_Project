@@ -7,11 +7,15 @@ public class PegBase : MonoBehaviour
     public PegData data;
     public int count;
 
+    private void Start()
+    {
+        count = data.breakCount;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.collider.CompareTag("Orb")) return;
         //Debug.Log("충돌 발생");
-        count = data.breakCount;
 
         count--;
 
@@ -23,7 +27,7 @@ public class PegBase : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     // 게임을 시작하거나 새로고침 함수가 실행될 때

@@ -12,7 +12,6 @@ public class DullEffect : IPegEffect
     public void conflictEvent(BattleManager game)
     {
         // 아무 효과 없음
-        Debug.Log("Dull페그 충돌");
     }
 }
 public class CoinEffect : IPegEffect
@@ -23,37 +22,33 @@ public class CoinEffect : IPegEffect
 
         // 코인 상승
         game.getCoin++;
-        Debug.Log($"정산 예정 코인 {game.getCoin}");
     }
 }
 public class RefreshEffect : IPegEffect
 {
     public void conflictEvent(BattleManager game)
     {
-        Debug.Log("새로고침 페그 충돌");
         // 패턴 다시 불러오기
+        game.RemovePegs(game.pegAlign);
+        game.CreatePegs(game.pegAlign, 2, 2, 8);
     }
 }
 public class CritEffect : IPegEffect
 {
     public void conflictEvent(BattleManager game)
     {
-        Debug.Log("크리티컬 페그 충돌");
         // 크리티컬
         game.isCritical = true;
-
     }
 }
 public class BombEffect : IPegEffect
 {
     public void conflictEvent(BattleManager game)
     {
-        Debug.Log("폭탄 페그 충돌");
-        // 첫 충돌이면 이미지 변환
-
         // 큰 반발력
 
         // 폭탄 공격횟수 추가
+        game.bombCount++;
     }
 }
 public class ShieldEffect : IPegEffect

@@ -9,6 +9,8 @@ public class DullColor : MonoBehaviour
         BattleManager battle = FindObjectOfType<BattleManager>();
 
         if (battle.isCritical)
-            this.GetComponent<SpriteRenderer>().color = Color.red;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        else
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

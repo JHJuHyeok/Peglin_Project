@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4860059964669690068}
   - component: {fileID: 8309903467343031272}
   - component: {fileID: 141955454795422231}
+  - component: {fileID: 4502652570484021439}
   m_Layer: 0
   m_Name: PEG_COIN
   m_TagString: Peg
@@ -135,3 +136,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 23bf15850b0bf9b40ac28402900720af, type: 2}
   count: 0
+--- !u!114 &4502652570484021439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324134683180932677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0751812fb667847b944327cb4f6825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

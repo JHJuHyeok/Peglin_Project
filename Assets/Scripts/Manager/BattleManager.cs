@@ -19,6 +19,14 @@ public class BattleManager : MonoBehaviour
     public int getCoin;
     private List<OrbData> orbList;
 
+    [Header("애니메이션 관리")]
+    [SerializeField] private GameObject peglin;
+    private Animator peglinAnim;
+    private static readonly int MoveHash = Animator.StringToHash("IsMoving");
+    private static readonly int AttackHash = Animator.StringToHash("IsAttack");
+    private static readonly int BombHash = Animator.StringToHash("IsBomb");
+    private static readonly int DeadHash = Animator.StringToHash("IsDead");
+
     [Header("UI 제어")]
     [SerializeField] Text ballName;
     [SerializeField] Text atkText;
@@ -56,6 +64,10 @@ public class BattleManager : MonoBehaviour
     public int damageCount;
     public int bombCount;
 
+    [Header("몬스터 관련")]
+    [SerializeField] private Transform[] waypoints;
+    private MonsterBase[] monsters;
+
     private Vector2 aimDir;                     // 마우스 위치
 
     [Header("마우스 커서")]
@@ -65,15 +77,27 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Texture2D cursorAim;
     [SerializeField] private Texture2D cursorCant;
 
+    [Header("랜덤 생성 맵 종류")]
+    [SerializeField] private GameObject pegAlign_One;
+    [SerializeField] private GameObject pegAlign_Two;
+    [SerializeField] private GameObject pegAlign_Three;
+    [SerializeField] private GameObject peg_Dull;
+    [SerializeField] private GameObject peg_Coin;
+    [SerializeField] private GameObject peg_Crit;
+    [SerializeField] private GameObject peg_Ref;
+    [SerializeField] private GameObject peg_Bomb;
+    public GameObject pegAlign;
+
     // 턴 확인
     public bool isMyTurn = true;
+    public bool isFire = false;
     public bool isOrbFall = false;
     private bool isProcessingTurn = false;
 
 
     private void Awake()
     {
-
+        peglinAnim = peglin.GetComponent<Animator>();
     }
 
     private void Start()
@@ -87,6 +111,10 @@ public class BattleManager : MonoBehaviour
         CoinText.text = $"{player.Coin}";
         HPText.text = $"{player.currentHP}/{player.MaxHP}";
         GarbageCount.text = $"{garbageCount}/{garbageMax}";
+
+        monsters = FindObjectsOfType<MonsterBase>();
+
+        CreateAlign(2, 2, 8);
     }
 
     private void Update()
@@ -97,29 +125,34 @@ public class BattleManager : MonoBehaviour
             {
                 StartCoroutine(MyTurn());
 
-                // 마우스 기준으로 방향 계산
-                Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mouseWorld.z = 0f;
-                aimDir = (mouseWorld - shootPoint.position).normalized;
+                if (!isFire)
+                {
+                    // 마우스 기준으로 방향 계산
+                    Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mouseWorld.z = 0f;
+                    aimDir = (mouseWorld - shootPoint.position).normalized;
 
-                // 궤적 표시
-                predictor.ShowTrajectory(aimDir);
-
-                if (Input.GetMouseButtonDown(0))
+                    // 궤적 표시
+                    predictor.ShowTrajectory(aimDir);
+                }
+                if (Input.GetMouseButtonUp(0) && !isFire)
                 {
                     isMyTurn = false;
                     //isProcessingTurn = false;
                     Fire();
                 }
             }
-            else            // 적 턴
+            else if (!isMyTurn)   // 적 턴
             {
-                StartCoroutine(CantControlTurn());
+                StartCoroutine(OrbPanelUpdate());
+                //StartCoroutine(MyAttack(monsters[0].gameObject, 0.1f));
+                //MoveToPeglin(peglin, waypoints, 0.2f);
+
             }
         }
     }
 
-    public IEnumerator MyTurn()
+    private IEnumerator MyTurn()
     {
         isProcessingTurn = true;
 
@@ -135,12 +168,13 @@ public class BattleManager : MonoBehaviour
         // 지니고 있는 오브 리스트 0번 SO의 프리펩을 배치
         CreateBall(orbList[0]);
 
-        yield return null;
         isProcessingTurn = false;
+        yield return null;
     }
-
-    public IEnumerator CantControlTurn()
+    // 오브 패널 UI 업데이트
+    private IEnumerator OrbPanelUpdate()
     {
+        //yield return null;
         isProcessingTurn = true;
 
         Cursor.SetCursor(cursorCant, cursorSpot, CursorMode.Auto);
@@ -152,8 +186,65 @@ public class BattleManager : MonoBehaviour
             UpdateOrbUI(orbList[0]);
             isOrbFall = false;
         }
-        yield return null;
+        isMyTurn = true;
         isProcessingTurn = false;
+        Debug.Log("오브 업데이트");
+        yield return null;
+    }
+    // 데미지 정산 애니메이션
+    private IEnumerator MyAttack(GameObject target, float duration)
+    {
+        //yield return StartCoroutine(OrbPanelUpdate());
+
+        if (bombCount != 0)
+        {
+            // 폭탄 던지기
+            peglinAnim.SetBool(BombHash, true);
+            yield return new WaitForSeconds(1.0f);
+            // 여기서 날아가는 폭탄 표시
+            peglinAnim.SetBool(BombHash, false);
+            bombCount = 0;
+        }
+        // 여기서 공격
+        peglinAnim.SetBool(AttackHash, true);
+        GameObject throwOrb = Instantiate(currentBall, peglin.transform, false);
+
+        throwOrb.transform.position = Vector2.MoveTowards(throwOrb.transform.position, target.transform.position, duration);
+        // 0.1초 후에 삭제
+        yield return new WaitForSeconds(duration);
+        Destroy(throwOrb);
+        // 몬스터 체력 감소
+        if (target.TryGetComponent<MonsterBase>(out var monster))
+        {
+            monster.Damaged(damageCount);
+            damageCount = 0;
+        }
+
+        peglinAnim.SetBool(AttackHash, false);
+        isProcessingTurn = false;
+        Debug.Log("공격 진행");
+        yield return new WaitForSeconds(0.2f);
+        isMyTurn = true;
+    }
+
+
+    private IEnumerator MoveToPeglin(GameObject peglin, Transform[] waypoint, float seconds)
+    {
+        //yield return StartCoroutine(MyAttack(monsters[0].gameObject, 0.1f));
+
+        if (peglin.TryGetComponent<MonsterBase>(out var data))
+        {
+            //waypoint[data.currentPoint].position;
+            peglin.transform.position = Vector2.MoveTowards(
+                    peglin.transform.position, 
+                    waypoint[data.currentPoint].position, seconds);
+            data.currentPoint++;
+
+            yield return new WaitForSeconds(seconds + 0.1f);
+            isProcessingTurn = false;
+            isMyTurn = true;
+            yield return null;
+        }
     }
 
     // 오브 발사
@@ -161,8 +252,108 @@ public class BattleManager : MonoBehaviour
     {
         orbRb.gravityScale = predictor.gravityScale;
         orbRb.AddForce(aimDir * power, ForceMode2D.Impulse);
-        StopCoroutine(MyTurn());
+        //StopCoroutine(MyTurn());
+        isFire = true;
         predictor.HideTrajectory();
+    }
+
+    // 랜덤 배치 생성
+    public void CreateAlign(int critPeg, int refPeg, int bombPeg)
+    {
+        // 랜덤으로 페그 배치 생성
+        pegAlign = new GameObject();
+        int r = Random.Range(0, 3);
+        switch (r)
+        {
+            case 0:
+                pegAlign = Instantiate(pegAlign_One, pegAlign_One.transform.position, Quaternion.identity);
+                break;
+            case 1:
+                pegAlign = Instantiate(pegAlign_Two, pegAlign_Two.transform.position, Quaternion.identity);
+                break;
+            case 2:
+                pegAlign = Instantiate(pegAlign_Three, pegAlign_Three.transform.position, Quaternion.identity);
+                break;
+        }
+
+        CreatePegs(pegAlign, critPeg, refPeg, bombPeg);
+    }
+
+    public void CreatePegs(GameObject align, int critPeg, int refPeg, int bombPeg)
+    {
+        if (align.transform.childCount == 0) return;
+
+        List<int> executeNum = new List<int>();     // 전체 제외 인덱스
+        List<int> critPegNum = new List<int>();     // 크리티컬 페그 인덱스
+        List<int> refPegNum = new List<int>();      // 새로고침 페그 인덱스
+        List<int> bombPegNum = new List<int>();     // 폭탄 페그 인덱스
+
+        for (int i = 0; i < critPeg; i++)
+        {
+            int r = Random.Range(0, align.transform.childCount);
+
+            while (executeNum.Contains(r))
+            {
+                r = Random.Range(0, align.transform.childCount);
+            }
+            executeNum.Add(r);
+            critPegNum.Add(r);
+        }
+        for (int i =0; i< refPeg; i++)
+        {
+            int r = Random.Range(0, align.transform.childCount);
+
+            while (executeNum.Contains(r))
+            {
+                r = Random.Range(0, align.transform.childCount);
+            }
+            executeNum.Add(r);
+            refPegNum.Add(r);
+        }
+        for (int i = 0; i < bombPeg; i++)
+        {
+            int r = Random.Range(0, align.transform.childCount);
+
+            while (executeNum.Contains(r))
+            {
+                r = Random.Range(0, align.transform.childCount);
+            }
+            executeNum.Add(r);
+            bombPegNum.Add(r);
+        }
+
+        for (int i = 0; i < align.transform.childCount; i++)
+        {
+            if (critPegNum.Contains(i))
+            {
+                GameObject aPeg = Instantiate(peg_Crit);
+                aPeg.transform.SetParent(align.transform.GetChild(i), false);
+            }
+            else if(refPegNum.Contains(i))
+            {
+                GameObject aPeg = Instantiate(peg_Ref);
+                aPeg.transform.SetParent(align.transform.GetChild(i), false);
+            }
+            else if (bombPegNum.Contains(i))
+            {
+                GameObject aPeg = Instantiate(peg_Bomb);
+                aPeg.transform.SetParent(align.transform.GetChild(i), false);
+            }
+            else
+            {
+                GameObject aPeg = Instantiate(peg_Coin);
+                aPeg.transform.SetParent(align.transform.GetChild(i), false);
+            }
+        }
+    }
+
+    public void RemovePegs(GameObject align)
+    {
+        foreach(Transform child in align.transform)
+        {
+            foreach(Transform peg in child)
+                Destroy(peg.gameObject);
+        }
     }
 
     private void UpdateOrbUI(OrbData orb)
@@ -191,7 +382,10 @@ public class BattleManager : MonoBehaviour
     private void RemoveOrbPanelChild()
     {
         Transform targetTransform = orbsPanel.GetComponent<Transform>();
-        Destroy(targetTransform.GetChild(1).gameObject);
+        if (targetTransform.childCount == 0)
+            GetNewOrbs();
+        else
+            Destroy(targetTransform.GetChild(0).gameObject);
     }
     // 오브 스폰 위치에 오브 배치
     private void CreateBall(OrbData orb)
@@ -294,5 +488,14 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        if (waypoints == null) return; //없으면 하지말고
 
+        Gizmos.color = Color.yellow;//노란색
+        for (int i = 0; i < waypoints.Length - 1; i++)
+        {
+            Gizmos.DrawLine(waypoints[i].position, waypoints[i + 1].position);
+        }
+    }
 }

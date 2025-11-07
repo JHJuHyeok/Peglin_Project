@@ -41,7 +41,6 @@ public class OrbBase : MonoBehaviour
         else
             battle.damageCount += battle.critAtk;
 
-        Debug.Log($"현재 데미지: {battle.damageCount}");
 
         // 페그 종류 따라 함수 실행
         if (collision.gameObject.TryGetComponent<PegBase>(out PegBase peg))
@@ -54,16 +53,17 @@ public class OrbBase : MonoBehaviour
                     dullEffect.conflictEvent(battle);
                     break;
                 case PegType.Coin:
-                    coinEffect.conflictEvent(battle);
+                        coinEffect.conflictEvent(battle);
                     break;
                 case PegType.Crit:
-                    critEffect.conflictEvent(battle);
+                        critEffect.conflictEvent(battle);
                     break;
                 case PegType.Refresh:
-                    refEffect.conflictEvent(battle);
+                        refEffect.conflictEvent(battle);
                     break;
                 case PegType.Bomb:
-                    bombEffect.conflictEvent(battle);
+                    if(peg.count == 0)
+                        bombEffect.conflictEvent(battle);
                     break;
             }
         }
@@ -82,6 +82,7 @@ public class OrbBase : MonoBehaviour
             battle.isOrbFall = true;
             battle.isCritical = false;
             battle.isMyTurn = false;
+            battle.isFire = false;
         }
     }
 }
